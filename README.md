@@ -66,8 +66,8 @@ A nostalgic recreation of the classic Windows 98 desktop experience built with N
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/devvyyxyz/windows-98-site.git
-cd windows-98-site
+git clone https://github.com/risterz/windows98-emulator.git
+cd windows98-emulator
 ```
 
 2. **Install dependencies**
@@ -158,15 +158,32 @@ windows98-emulator/
 
 ## 📸 Screenshots
 
-Replace these placeholder names with your actual screenshots:
+### 🖥️ Main Desktop View
+![Main Desktop](screenshots/windows98-desktop.png)
+*The authentic Windows 98 desktop experience with icons, taskbar, and start button*
 
-- `screenshots/windows98-desktop.png` - Main desktop view
-- `screenshots/start-menu-games.png` - Start menu with Games submenu
-- `screenshots/snake-game-interface.png` - Snake game window
-- `screenshots/snake-game-playing.png` - Snake game in action
-- `screenshots/minesweeper-game.png` - Minesweeper game
-- `screenshots/calculator-app.png` - Calculator application
-- `screenshots/all-windows-open.png` - Multiple windows demonstration
+### 🎮 Games Menu
+![Start Menu Games](screenshots/start-menu-games.png)
+*Start Menu → Programs → Games submenu showing all available classic games*
+
+### 🐍 Snake Game
+![Snake Game Interface](screenshots/snake-game-interface.png)
+*Snake game window with authentic Windows 98 styling*
+
+![Snake Game Playing](screenshots/snake-game-playing.png)
+*Snake game in action - collect apples and avoid collisions!*
+
+### 💣 Minesweeper Game
+![Minesweeper Game](screenshots/minesweeper-game.png)
+*Classic Minesweeper with Windows 98 interface*
+
+### 🧮 Calculator Application
+![Calculator App](screenshots/calculator-app.png)
+*Windows 98 style calculator with authentic button styling*
+
+### 🪟 Multiple Windows Demo
+![All Windows Open](screenshots/all-windows-open.png)
+*Demonstration of window management with multiple applications running*
 
 ## 🎨 Customization
 
