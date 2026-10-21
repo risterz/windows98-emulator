@@ -1,6 +1,6 @@
 # 🖥️ Windows 98 Emulator
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Cloudflare-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://windows98-emulator.harisharraz02.workers.dev)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Cloudflare-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://windows98-emulator.pages.dev)
 
 
 A nostalgic recreation of the classic Windows 98 desktop experience built with Next.js, React, and TypeScript. Complete with authentic styling, working applications, and classic games including the newly added Snake game!
