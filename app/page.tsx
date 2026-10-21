@@ -40,6 +40,7 @@ export default function Windows98Emulator() {
           onMinimize={minimizeWindow}
           onMaximize={maximizeWindow}
           onUpdate={updateWindow}
+          onOpenWindow={openWindow}
         />
 
         {showStartMenu && <StartMenu onClose={() => setShowStartMenu(false)} onOpenWindow={openWindow} />}
@@ -49,6 +50,7 @@ export default function Windows98Emulator() {
           currentTime={currentTime}
           windows={windows}
           onWindowClick={focusWindow}
+          onOpenWindow={openWindow}
         />
       </div>
     </SystemSettingsProvider>

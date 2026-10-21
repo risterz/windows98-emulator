@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import {
   Monitor,
   FileText,
@@ -12,6 +13,7 @@ import {
   Music,
   Settings,
   HardDrive,
+  Terminal,
 } from "lucide-react"
 import { useSystemSettings } from "@/hooks/use-system-settings"
 import { getWallpaperStyle } from "@/components/wallpapers"
@@ -23,70 +25,87 @@ interface DesktopProps {
 
 export function Desktop({ onClick, onOpenWindow }: DesktopProps) {
   const { settings } = useSystemSettings()
+  const [selectedApp, setSelectedApp] = useState<string | null>(null)
 
   const desktopIcons = [
     { name: "My Computer", icon: Monitor, app: "explorer" },
-    { name: "Recycle Bin", icon: Trash2, app: "recycle" },
-    { name: "Internet Explorer", icon: Globe, app: "ie" },
     { name: "My Documents", icon: Folder, app: "documents" },
+    { name: "Internet Explorer", icon: Globe, app: "ie" },
     { name: "Network Neighborhood", icon: HardDrive, app: "network" },
+    { name: "Recycle Bin", icon: Trash2, app: "recycle" },
     { name: "Control Panel", icon: Settings, app: "control" },
+    { name: "MS-DOS Prompt", icon: Terminal, app: "cmd" },
     { name: "Notepad", icon: FileText, app: "notepad" },
+    { name: "WordPad", icon: FileText, app: "wordpad" },
     { name: "Calculator", icon: Calculator, app: "calculator" },
     { name: "Paint", icon: Palette, app: "paint" },
+    { name: "Media Player", icon: Music, app: "mediaplayer" },
     { name: "Solitaire", icon: Gamepad2, app: "solitaire" },
     { name: "Minesweeper", icon: Gamepad2, app: "minesweeper" },
     { name: "Snake", icon: Gamepad2, app: "snake" },
-    { name: "Media Player", icon: Music, app: "mediaplayer" },
   ]
 
   const wallpaperStyle = getWallpaperStyle(settings.display.wallpaper)
 
+  const handleIconClick = (e: React.MouseEvent, app: string) => {
+    e.stopPropagation()
+    setSelectedApp(app)
+    onOpenWindow(app)
+  }
+
+  const handleContainerClick = () => {
+    setSelectedApp(null)
+    onClick()
+  }
+
   return (
-    <div className="absolute inset-0 p-2" onClick={onClick} style={wallpaperStyle}>
+    <div
+      className="absolute inset-x-0 top-0 bottom-8 p-3 overflow-x-auto overflow-y-hidden select-none z-0"
+      onClick={handleContainerClick}
+      style={wallpaperStyle}
+    >
       {settings.desktop.showDesktopIcons && (
-        <div className="grid grid-cols-1 gap-4 w-20">
-          {desktopIcons.map((icon, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center cursor-pointer hover:bg-blue-600/20 p-2 rounded transition-colors"
-              onDoubleClick={(e) => {
-                e.stopPropagation()
-                onOpenWindow(icon.app)
-              }}
-              style={{
-                fontSize:
-                  settings.desktop.iconSize === "Small"
-                    ? "10px"
-                    : settings.desktop.iconSize === "Large"
-                      ? "14px"
-                      : "12px",
-              }}
-            >
+        <div className="flex flex-col flex-wrap content-start items-start gap-y-1.5 gap-x-3 h-full max-h-full">
+          {desktopIcons.map((icon, index) => {
+            const isSelected = selectedApp === icon.app
+            const iconSize =
+              settings.desktop.iconSize === "Small" ? 24 : settings.desktop.iconSize === "Large" ? 40 : 32
+            const fontSize =
+              settings.desktop.iconSize === "Small"
+                ? "10px"
+                : settings.desktop.iconSize === "Large"
+                  ? "13px"
+                  : "11px"
+
+            return (
               <div
-                className="mb-1 text-white drop-shadow-lg"
-                style={{
-                  width:
-                    settings.desktop.iconSize === "Small"
-                      ? "24px"
-                      : settings.desktop.iconSize === "Large"
-                        ? "40px"
-                        : "32px",
-                  height:
-                    settings.desktop.iconSize === "Small"
-                      ? "24px"
-                      : settings.desktop.iconSize === "Large"
-                        ? "40px"
-                        : "32px",
-                }}
+                key={index}
+                className={`flex flex-col items-center justify-start cursor-pointer w-20 p-1.5 rounded transition-colors group ${
+                  isSelected
+                    ? "bg-[#000080]/80 outline outline-1 outline-dashed outline-white/80"
+                    : "hover:bg-blue-600/25 active:bg-blue-700/50"
+                }`}
+                onClick={(e) => handleIconClick(e, icon.app)}
+                onDoubleClick={(e) => handleIconClick(e, icon.app)}
+                title={`Click to open ${icon.name}`}
+                style={{ fontSize }}
               >
-                <icon.icon
-                  size={settings.desktop.iconSize === "Small" ? 24 : settings.desktop.iconSize === "Large" ? 40 : 32}
-                />
+                <div
+                  className="mb-1 text-white drop-shadow-md flex items-center justify-center"
+                  style={{ width: iconSize, height: iconSize }}
+                >
+                  <icon.icon size={iconSize} />
+                </div>
+                <span
+                  className={`text-center leading-tight drop-shadow font-normal px-1 py-0.5 rounded break-words w-full select-none ${
+                    isSelected ? "bg-[#000080] text-white font-semibold" : "text-white"
+                  }`}
+                >
+                  {icon.name}
+                </span>
               </div>
-              <span className="text-white text-center leading-tight drop-shadow-lg font-bold">{icon.name}</span>
-            </div>
-          ))}
+            )
+          })}
         </div>
       )}
 

@@ -18,6 +18,7 @@ import {
   Monitor,
   Zap,
   Wrench,
+  Terminal,
 } from "lucide-react"
 
 interface StartMenuProps {
@@ -42,9 +43,10 @@ export function StartMenu({ onClose, onOpenWindow }: StartMenuProps) {
       name: "Accessories",
       items: [
         { name: "Notepad", app: "notepad", icon: FileText },
+        { name: "WordPad", app: "wordpad", icon: FileText },
         { name: "Calculator", app: "calculator", icon: Calculator },
         { name: "Paint", app: "paint", icon: Palette },
-        { name: "WordPad", app: "wordpad", icon: FileText },
+        { name: "MS-DOS Prompt", app: "cmd", icon: Terminal },
         { name: "Character Map", app: "charmap", icon: FileText },
         { name: "System Information", app: "sysinfo", icon: Monitor },
       ],
@@ -102,11 +104,13 @@ export function StartMenu({ onClose, onOpenWindow }: StartMenuProps) {
   }
 
   return (
-    <div className="absolute bottom-8 left-0 w-64 bg-[#c0c0c0] border-2 border-white border-r-[#808080] border-b-[#808080] shadow-lg z-50">
+    <div className="absolute bottom-8 left-0 w-64 bg-[#c0c0c0] border-2 border-white border-r-[#808080] border-b-[#808080] shadow-2xl z-[70] select-none">
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-2 flex items-center gap-2">
-        <User size={16} />
-        <span className="text-sm font-bold">Windows 98</span>
+      <div className="bg-gradient-to-r from-blue-700 to-blue-900 text-white p-2 flex items-center gap-2 shadow">
+        <div className="w-5 h-5 bg-gradient-to-br from-red-500 to-yellow-500 rounded-sm flex items-center justify-center">
+          <div className="w-2.5 h-2.5 bg-white rounded-sm"></div>
+        </div>
+        <span className="text-sm font-bold tracking-wide">Windows 98</span>
       </div>
 
       {/* Menu Items */}
@@ -123,7 +127,7 @@ export function StartMenu({ onClose, onOpenWindow }: StartMenuProps) {
             </Button>
 
             {item.name === "Programs" && (
-              <div className="absolute left-full top-0 w-48 bg-[#c0c0c0] border-2 border-white border-r-[#808080] border-b-[#808080] shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-50">
+              <div className="absolute left-full top-0 w-48 bg-[#c0c0c0] border-2 border-white border-r-[#808080] border-b-[#808080] shadow-xl opacity-0 group-hover:opacity-100 transition-opacity z-50">
                 {programs.map((category, catIndex) => (
                   <div
                     key={catIndex}
@@ -137,7 +141,7 @@ export function StartMenu({ onClose, onOpenWindow }: StartMenuProps) {
                       <span className="ml-auto">▶</span>
                     </Button>
                     {hoveredCategory === category.name && (
-                      <div className="absolute left-full top-0 w-44 bg-[#c0c0c0] border-2 border-white border-r-[#808080] border-b-[#808080] shadow-lg z-60">
+                      <div className="absolute left-full top-0 w-44 bg-[#c0c0c0] border-2 border-white border-r-[#808080] border-b-[#808080] shadow-xl z-60">
                         {category.items.map((program, progIndex) => (
                           <Button
                             key={progIndex}
@@ -156,7 +160,7 @@ export function StartMenu({ onClose, onOpenWindow }: StartMenuProps) {
             )}
 
             {item.name === "Settings" && (
-              <div className="absolute left-full top-0 w-48 bg-[#c0c0c0] border-2 border-white border-r-[#808080] border-b-[#808080] shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute left-full top-0 w-48 bg-[#c0c0c0] border-2 border-white border-r-[#808080] border-b-[#808080] shadow-xl opacity-0 group-hover:opacity-100 transition-opacity z-50">
                 {settings.map((setting, setIndex) => (
                   <Button
                     key={setIndex}
@@ -176,7 +180,10 @@ export function StartMenu({ onClose, onOpenWindow }: StartMenuProps) {
 
         <Button
           className="w-full justify-start h-8 px-2 bg-transparent hover:bg-blue-600 hover:text-white text-black text-xs border-none"
-          onClick={() => onOpenWindow("shutdown")}
+          onClick={() => {
+            onOpenWindow("shutdown")
+            onClose()
+          }}
         >
           <Power size={16} className="mr-2" />
           Shut Down...
