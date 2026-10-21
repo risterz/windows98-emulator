@@ -1,0 +1,8 @@
+{
+  "name": "windows98-emulator",
+  "compatibility_date": "2024-09-23",
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "single-page-application"
+  }
+}
