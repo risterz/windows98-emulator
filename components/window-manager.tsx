@@ -10,9 +10,12 @@ import { Solitaire } from "@/components/apps/solitaire"
 import { ControlPanel } from "@/components/apps/control-panel"
 import { InternetExplorer } from "@/components/apps/internet-explorer"
 import { Snake } from "@/components/apps/snake"
+import { SpaceCadetPinball } from "@/components/apps/pinball"
+import { FreeCell } from "@/components/apps/freecell"
 import { RecycleBin } from "@/components/apps/recycle-bin"
 import { MediaPlayer } from "@/components/apps/media-player"
 import { WordPad } from "@/components/apps/wordpad"
+import { SoundRecorder } from "@/components/apps/sound-recorder"
 import { TaskManager } from "@/components/apps/task-manager"
 import { CmdPrompt } from "@/components/apps/cmd-prompt"
 import { RunDialog } from "@/components/apps/run-dialog"
@@ -55,6 +58,10 @@ export function WindowManager({
         return <Minesweeper />
       case "snake":
         return <Snake />
+      case "pinball":
+        return <SpaceCadetPinball />
+      case "freecell":
+        return <FreeCell />
       case "paint":
         return <Paint />
       case "explorer":
@@ -67,6 +74,8 @@ export function WindowManager({
         return <RecycleBin />
       case "mediaplayer":
         return <MediaPlayer />
+      case "soundrec":
+        return <SoundRecorder />
       case "wordpad":
         return <WordPad />
       case "taskmgr":

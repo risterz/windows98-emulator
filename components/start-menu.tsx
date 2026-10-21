@@ -54,6 +54,7 @@ export function StartMenu({ onClose, onOpenWindow }: StartMenuProps) {
     {
       name: "Games",
       items: [
+        { name: "3D Pinball", app: "pinball", icon: Gamepad2 },
         { name: "Solitaire", app: "solitaire", icon: Gamepad2 },
         { name: "Minesweeper", app: "minesweeper", icon: Gamepad2 },
         { name: "Snake", app: "snake", icon: Gamepad2 },

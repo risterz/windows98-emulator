@@ -25,6 +25,8 @@ export function useWindows() {
       minesweeper: { title: "Minesweeper", width: 300, height: 360 },
       snake: { title: "Snake", width: 400, height: 500 },
       paint: { title: "untitled - Paint", width: 620, height: 460 },
+      pinball: { title: "3D Pinball for Windows - Space Cadet", width: 420, height: 610 },
+      freecell: { title: "FreeCell", width: 560, height: 450 },
       explorer: { title: "Exploring - C:\\", width: 620, height: 420 },
       documents: { title: "My Documents", width: 620, height: 420 },
       network: { title: "Network Neighborhood", width: 620, height: 420 },
@@ -32,14 +34,13 @@ export function useWindows() {
       solitaire: { title: "Solitaire", width: 700, height: 500 },
       control: { title: "Control Panel", width: 620, height: 450 },
       ie: { title: "Internet Explorer", width: 800, height: 560 },
-      mediaplayer: { title: "Windows Media Player", width: 420, height: 340 },
+      mediaplayer: { title: "Windows Media Player", width: 420, height: 350 },
       taskmgr: { title: "Windows Task Manager", width: 420, height: 360 },
       sysinfo: { title: "System Information", width: 500, height: 400 },
       wordpad: { title: "Document - WordPad", width: 640, height: 480 },
       charmap: { title: "Character Map", width: 450, height: 350 },
       volume: { title: "Volume Control", width: 340, height: 260 },
-      soundrec: { title: "Sound Recorder", width: 350, height: 180 },
-      freecell: { title: "FreeCell", width: 700, height: 500 },
+      soundrec: { title: "Sound - Sound Recorder", width: 340, height: 220 },
       cmd: { title: "MS-DOS Prompt", width: 600, height: 360 },
       sysmon: { title: "System Monitor", width: 500, height: 400 },
       regedit: { title: "Registry Editor", width: 600, height: 450 },
@@ -57,11 +58,14 @@ export function useWindows() {
       "calculator",
       "minesweeper",
       "snake",
+      "pinball",
+      "freecell",
       "solitaire",
       "control",
       "mediaplayer",
       "taskmgr",
       "volume",
+      "soundrec",
       "paint",
       "recycle",
       "ie",
@@ -87,14 +91,14 @@ export function useWindows() {
       const winWidth = typeof window !== "undefined" ? window.innerWidth : 1024
       const winHeight = typeof window !== "undefined" ? window.innerHeight : 768
 
-      const targetWidth = Math.min(config.width, winWidth - 40)
-      const targetHeight = Math.min(config.height, winHeight - 80)
+      const targetWidth = Math.min(config.width, winWidth - 30)
+      const targetHeight = Math.min(config.height, winHeight - 70)
 
-      const maxX = Math.max(40, winWidth - targetWidth - 40)
-      const maxY = Math.max(30, winHeight - targetHeight - 80)
+      const maxX = Math.max(30, winWidth - targetWidth - 30)
+      const maxY = Math.max(25, winHeight - targetHeight - 70)
 
-      const initialX = Math.floor(Math.random() * (maxX - 40)) + 40
-      const initialY = Math.floor(Math.random() * (maxY - 30)) + 30
+      const initialX = Math.floor(Math.random() * (maxX - 30)) + 30
+      const initialY = Math.floor(Math.random() * (maxY - 25)) + 25
 
       const newWindow: WindowState = {
         id: `${app}-${Date.now()}`,

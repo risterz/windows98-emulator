@@ -14,9 +14,12 @@ import {
   Settings,
   HardDrive,
   Terminal,
+  Disc,
+  Sparkles,
 } from "lucide-react"
 import { useSystemSettings } from "@/hooks/use-system-settings"
 import { getWallpaperStyle } from "@/components/wallpapers"
+import { playClick } from "@/lib/sounds"
 
 interface DesktopProps {
   onClick: () => void
@@ -26,6 +29,7 @@ interface DesktopProps {
 export function Desktop({ onClick, onOpenWindow }: DesktopProps) {
   const { settings } = useSystemSettings()
   const [selectedApp, setSelectedApp] = useState<string | null>(null)
+  const [contextMenu, setContextMenu] = useState<{ x: number; y: number } | null>(null)
 
   const desktopIcons = [
     { name: "My Computer", icon: Monitor, app: "explorer" },
@@ -35,12 +39,15 @@ export function Desktop({ onClick, onOpenWindow }: DesktopProps) {
     { name: "Recycle Bin", icon: Trash2, app: "recycle" },
     { name: "Control Panel", icon: Settings, app: "control" },
     { name: "MS-DOS Prompt", icon: Terminal, app: "cmd" },
+    { name: "3D Pinball", icon: Disc, app: "pinball" },
     { name: "Notepad", icon: FileText, app: "notepad" },
     { name: "WordPad", icon: FileText, app: "wordpad" },
     { name: "Calculator", icon: Calculator, app: "calculator" },
     { name: "Paint", icon: Palette, app: "paint" },
     { name: "Media Player", icon: Music, app: "mediaplayer" },
+    { name: "Sound Recorder", icon: Music, app: "soundrec" },
     { name: "Solitaire", icon: Gamepad2, app: "solitaire" },
+    { name: "FreeCell", icon: Gamepad2, app: "freecell" },
     { name: "Minesweeper", icon: Gamepad2, app: "minesweeper" },
     { name: "Snake", icon: Gamepad2, app: "snake" },
   ]
@@ -49,19 +56,29 @@ export function Desktop({ onClick, onOpenWindow }: DesktopProps) {
 
   const handleIconClick = (e: React.MouseEvent, app: string) => {
     e.stopPropagation()
+    playClick()
     setSelectedApp(app)
+    setContextMenu(null)
     onOpenWindow(app)
   }
 
   const handleContainerClick = () => {
     setSelectedApp(null)
+    setContextMenu(null)
     onClick()
+  }
+
+  const handleContextMenu = (e: React.MouseEvent) => {
+    e.preventDefault()
+    playClick()
+    setContextMenu({ x: e.clientX, y: e.clientY })
   }
 
   return (
     <div
       className="absolute inset-x-0 top-0 bottom-8 p-3 overflow-x-auto overflow-y-hidden select-none z-0"
       onClick={handleContainerClick}
+      onContextMenu={handleContextMenu}
       style={wallpaperStyle}
     >
       {settings.desktop.showDesktopIcons && (
@@ -106,6 +123,61 @@ export function Desktop({ onClick, onOpenWindow }: DesktopProps) {
               </div>
             )
           })}
+        </div>
+      )}
+
+      {/* Right-click Desktop Context Menu */}
+      {contextMenu && (
+        <div
+          className="fixed bg-[#c0c0c0] border-2 border-white border-r-[#808080] border-b-[#808080] shadow-2xl p-0.5 w-48 text-xs z-[80] select-none text-black"
+          style={{ top: contextMenu.y, left: contextMenu.x }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="hover:bg-blue-600 hover:text-white px-3 py-1 cursor-pointer flex justify-between">
+            <span>Arrange Icons</span>
+            <span>▶</span>
+          </div>
+          <div className="hover:bg-blue-600 hover:text-white px-3 py-1 cursor-pointer">
+            <span>Line up Icons</span>
+          </div>
+          <div
+            className="hover:bg-blue-600 hover:text-white px-3 py-1 cursor-pointer"
+            onClick={() => {
+              setContextMenu(null)
+              playClick()
+            }}
+          >
+            <span>Refresh</span>
+          </div>
+          <div className="border-t border-[#808080] my-1" />
+          <div
+            className="hover:bg-blue-600 hover:text-white px-3 py-1 cursor-pointer"
+            onClick={() => {
+              onOpenWindow("notepad")
+              setContextMenu(null)
+            }}
+          >
+            <span>New Text Document</span>
+          </div>
+          <div
+            className="hover:bg-blue-600 hover:text-white px-3 py-1 cursor-pointer"
+            onClick={() => {
+              onOpenWindow("pinball")
+              setContextMenu(null)
+            }}
+          >
+            <span>Launch 3D Pinball</span>
+          </div>
+          <div className="border-t border-[#808080] my-1" />
+          <div
+            className="hover:bg-blue-600 hover:text-white px-3 py-1 cursor-pointer font-bold"
+            onClick={() => {
+              onOpenWindow("control")
+              setContextMenu(null)
+            }}
+          >
+            <span>Properties</span>
+          </div>
         </div>
       )}
 
