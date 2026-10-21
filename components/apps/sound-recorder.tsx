@@ -152,7 +152,7 @@ export function SoundRecorder() {
   }
 
   return (
-    <div className="h-full flex flex-col bg-[#c0c0c0] text-xs select-none p-2 gap-2">
+    <div className="h-full flex flex-col bg-[#c0c0c0] text-xs select-none p-2 gap-1.5 overflow-y-auto">
       {/* Menu Bar */}
       <div className="bg-[#c0c0c0] border-b border-[#808080] pb-1 flex gap-3 -mx-2 -mt-2 px-2 pt-1">
         <span className="hover:bg-blue-600 hover:text-white px-1 cursor-pointer">File</span>

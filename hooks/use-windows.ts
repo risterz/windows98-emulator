@@ -40,7 +40,7 @@ export function useWindows() {
       wordpad: { title: "Document - WordPad", width: 640, height: 480 },
       charmap: { title: "Character Map", width: 450, height: 350 },
       volume: { title: "Volume Control", width: 340, height: 260 },
-      soundrec: { title: "Sound - Sound Recorder", width: 340, height: 220 },
+      soundrec: { title: "Sound - Sound Recorder", width: 350, height: 260 },
       cmd: { title: "MS-DOS Prompt", width: 600, height: 360 },
       sysmon: { title: "System Monitor", width: 500, height: 400 },
       regedit: { title: "Registry Editor", width: 600, height: 450 },
